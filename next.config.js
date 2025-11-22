@@ -6,7 +6,7 @@ const nextConfig = {
   },
   // Required for GitHub Pages project deployment at ABHAY200.github.io/vylor
   basePath: '/vylor',
-  assetPrefix: '/vylor/',
+  assetPrefix: '/vylor',
 }
 
 module.exports = nextConfig
