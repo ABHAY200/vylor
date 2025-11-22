@@ -13,6 +13,7 @@ export const BRAND = {
 // Logo Images
 export const LOGO = {
   main: getImagePath('/images/logo-black.png'),
+  white: getImagePath('/images/logo-white.png'),
   alternate: getImagePath('/images/logo-black-alternate.png'),
 } as const
 
@@ -92,15 +93,15 @@ export const NAV_LINKS = [
 
 // Social Media Links
 export const SOCIAL_LINKS = [
-  { name: 'Instagram', href: '#', icon: 'instagram' },
+  { name: 'Instagram', href: 'https://www.instagram.com/balan_ajai333', icon: 'instagram' },
   { name: 'Twitter', href: '#', icon: 'twitter' },
-  { name: 'Facebook', href: '#', icon: 'facebook' },
+  { name: 'Facebook', href: 'https://www.facebook.com/share/17ndSnb3Qe/?mibextid=wwXIfr', icon: 'facebook' },
 ] as const
 
 // Contact Information
 export const CONTACT = {
-  email: 'info@vylor.com',
-  phone: '+1 (555) 123-4567',
+  email: 'ajaibalan@333gmail.com',
+  phone: '+1(647) 554-4344',
 } as const
 
 // Section Headings
