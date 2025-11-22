@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { FEATURED_PRODUCTS, HEADINGS } from '../constants'
+import { getImagePath } from '../lib/assets'
 
 export default function FeaturedProducts() {
   return (
@@ -35,7 +36,7 @@ export default function FeaturedProducts() {
             >
               <div className="relative overflow-hidden rounded-3xl aspect-[4/5]">
                 <Image 
-                  src={`/images/${item.image}`}
+                  src={getImagePath(`/images/${item.image}`)}
                   alt={item.title}
                   fill
                   className="object-cover"

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { COLLECTIONS, HEADINGS } from '../constants'
+import { getImagePath } from '../lib/assets'
 
 export default function CollectionSection() {
   return (
@@ -41,7 +42,7 @@ export default function CollectionSection() {
                   className="w-full h-full"
                 >
                   <Image 
-                    src={`/images/${item.image}`}
+                    src={getImagePath(`/images/${item.image}`)}
                     alt={item.title}
                     fill
                     className="object-cover"

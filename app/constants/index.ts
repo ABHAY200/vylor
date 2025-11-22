@@ -1,3 +1,5 @@
+import { getImagePath } from '../lib/assets'
+
 // Brand Information
 export const BRAND = {
   name: 'VYLOR',
@@ -10,8 +12,8 @@ export const BRAND = {
 
 // Logo Images
 export const LOGO = {
-  main: '/images/logo-black.jpeg',
-  alternate: '/images/logo-black-alternate.jpeg',
+  main: getImagePath('/images/logo-black.png'),
+  alternate: getImagePath('/images/logo-black-alternate.png'),
 } as const
 
 // Collection Data

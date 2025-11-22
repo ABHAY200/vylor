@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ABOUT, BRAND } from '../constants'
+import { getImagePath } from '../lib/assets'
 
 export default function AboutSection() {
   return (
@@ -49,7 +50,7 @@ export default function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden aspect-[3/4]">
               <Image 
-                src={`/images/${ABOUT.image}`}
+                src={getImagePath(`/images/${ABOUT.image}`)}
                 alt={ABOUT.imageAlt}
                 fill
                 className="object-cover"

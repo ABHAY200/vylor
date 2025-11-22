@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { GALLERY_IMAGES, HEADINGS } from '../constants'
+import { getImagePath } from '../lib/assets'
 
 export default function GallerySection() {
   return (
@@ -35,7 +36,7 @@ export default function GallerySection() {
               className="relative aspect-square overflow-hidden rounded-xl cursor-pointer"
             >
               <Image 
-                src={`/images/${img}`}
+                src={getImagePath(`/images/${img}`)}
                 alt={`Gallery ${index + 1}`}
                 fill
                 className="object-cover"
