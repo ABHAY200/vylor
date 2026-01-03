@@ -7,7 +7,7 @@ import { getImagePath } from '../lib/assets'
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
+    <section id="about" className="py-12 sm:py-16 md:py-20 px-3 sm:px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           <motion.div
