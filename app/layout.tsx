@@ -20,9 +20,46 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Vylor - The Visionary Tailor',
-  description: 'Premium clothing brand crafted with vision and precision. Discover timeless style with Vylor.',
-  keywords: 'fashion, clothing, premium, tailor, vylor, streetwear, lifestyle',
+  metadataBase: new URL('https://vylor.in'),
+  title: {
+    default: 'Vylor - The Visionary Tailor',
+    template: '%s | Vylor'
+  },
+  description: 'Where vision meets craftsmanship. Premium clothing designed for those who dare to be different. Discover timeless style with Vylor.',
+  keywords: ['fashion', 'clothing', 'premium', 'tailor', 'vylor', 'streetwear', 'lifestyle', 'visionary tailor', 'custom design'],
+  authors: [{ name: 'Vylor' }],
+  creator: 'Vylor',
+  publisher: 'Vylor',
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://vylor.in',
+    siteName: 'Vylor',
+    title: 'Vylor - The Visionary Tailor',
+    description: 'Premium clothing brand crafted with vision and precision. Discover timeless style with Vylor.',
+    images: [
+      {
+        url: '/images/logo-black.png',
+        width: 1200,
+        height: 630,
+        alt: 'Vylor - The Visionary Tailor',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vylor - The Visionary Tailor',
+    description: 'Premium clothing brand crafted with vision and precision.',
+    images: ['/images/logo-black.png'],
+  },
+  icons: {
+    icon: '/images/logo-black.png',
+    apple: '/images/logo-black.png',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { COLLECTIONS, HEADINGS } from '../constants'
 import { getImagePath } from '../lib/assets'
+import WhatsAppCard from './WhatsAppCard'
 
 export default function CollectionSection() {
   return (
@@ -55,6 +56,7 @@ export default function CollectionSection() {
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )

@@ -7,4 +7,5 @@ export { default as AboutSection } from './AboutSection'
 export { default as GallerySection } from './GallerySection'
 export { default as NewsletterSection } from './NewsletterSection'
 export { default as Footer } from './Footer'
+export { default as WhatsAppCard } from './WhatsAppCard'
 

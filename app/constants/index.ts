@@ -111,6 +111,8 @@ export const SOCIAL_LINKS = [
 export const CONTACT = {
   email: "ajaibalan@333gmail.com",
   phone: "+1(647) 554-4344",
+  whatsapp: "+91 9074434078",
+  whatsappLink: "https://wa.me/919074434078",
 } as const;
 
 // Section Headings

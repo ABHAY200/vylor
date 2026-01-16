@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CHURIDHAR_PRODUCTS } from '../constants'
-import { Navigation, Footer } from '../components'
+import { Navigation, Footer, WhatsAppCard } from '../components'
 
 export default function ChuridharListing() {
   return (
@@ -85,9 +85,9 @@ export default function ChuridharListing() {
                     <h3 className="font-serif text-lg font-bold group-hover:text-gray-600 transition-colors">
                       {product.name}
                     </h3>
-                    <span className="font-semibold text-lg">
+                    {/* <span className="font-semibold text-lg">
                       ₹{product.price.toLocaleString()}
-                    </span>
+                    </span> */}
                   </div>
                   <div className="flex flex-wrap gap-2 text-sm text-gray-500">
                     <span>{product.fabric}</span>
@@ -106,6 +106,10 @@ export default function ChuridharListing() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <WhatsAppCard />
           </div>
         </div>
       </section>
