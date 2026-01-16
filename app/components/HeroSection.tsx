@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { BRAND, LOGO } from '../constants'
 
@@ -48,16 +49,18 @@ export default function HeroSection() {
           {BRAND.tagline}
         </motion.p>
         
-        <motion.button
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-gray-800 transition-all w-full sm:w-auto max-w-xs sm:max-w-none"
-        >
-          Explore Collection
-        </motion.button>
+        <Link href="/churidhar">
+          <motion.button
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-gray-800 transition-all w-full sm:w-auto max-w-xs sm:max-w-none"
+          >
+            Explore Churidhar collections
+          </motion.button>
+        </Link>
       </motion.div>
 
       {/* Animated background elements */}
