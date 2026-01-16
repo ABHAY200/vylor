@@ -207,7 +207,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Party Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_05.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_7999.jpg?raw=true",
   },
   {
     id: 6,
@@ -219,7 +219,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Office Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_06.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8002.jpg?raw=true",
   },
   {
     id: 7,
@@ -231,7 +231,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Casual",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_07.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8003.jpg?raw=true"
   },
   {
     id: 8,
@@ -243,7 +243,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Traditional",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_08.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8006.jpg?raw=true"
   },
   {
     id: 9,
@@ -255,7 +255,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Casual",
     inStock: false,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_09.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8007.jpg?raw=true"
   },
   {
     id: 10,
@@ -267,7 +267,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Party Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_10.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8009.jpg?raw=true"
   },
   {
     id: 11,
@@ -279,7 +279,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Daily Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_11.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8010.jpg?raw=true"
   },
   {
     id: 12,
@@ -291,7 +291,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Wedding",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_12.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8014.jpg?raw=true"
   },
   {
     id: 13,
@@ -303,7 +303,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Casual",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_13.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8015.jpg?raw=true"
   },
   {
     id: 14,
@@ -315,7 +315,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Daily Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_14.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8016.jpg?raw=true"
   },
   {
     id: 15,
@@ -327,8 +327,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Festive",
     inStock: false,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_15.jpg",
-  },
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8017.jpg?raw=true"  },
   {
     id: 16,
     name: "Printed Casual Churidar Material",
@@ -339,8 +338,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Casual",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_16.jpg",
-  },
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8018.jpg?raw=true"  },
   {
     id: 17,
     name: "Office Wear Solid Churidar",
@@ -351,7 +349,7 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Office Wear",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_17.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8019.png?raw=true",
   },
   {
     id: 18,
@@ -363,6 +361,6 @@ export const CHURIDHAR_PRODUCTS = [
     occasion: "Traditional",
     inStock: true,
     image:
-      "https://raw.githubusercontent.com/USERNAME/fashion-studio-api/main/images/churidar_18.jpg",
+      "https://github.com/ABHAY200/vylor-be/blob/main/product-images/churidar_8020.png?raw=true"
   },
 ];
