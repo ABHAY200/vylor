@@ -32,7 +32,7 @@ export default function ChuridharListing() {
   }, []);
 
   const handleWhatsAppClick = (product: any) => {
-    const message = `Hi, I'm interested in the ${product.name} (Color: ${product.color}, Fabric: ${product.fabric}, Occasion: ${product.occasion}). Can I get more details?`;
+    const message = `*New Product Inquiry* 🛍️\n\n*Product Name:* ${product.name}\n*Color:* ${product.color}\n*Fabric:* ${product.fabric}\n*Occasion:* ${product.occasion}\n\n*Product Image:* ${product.image}\n\nHi, I'm interested in this product. Can I get more details?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`${CONTACT.whatsappLink}?text=${encodedMessage}`, "_blank");
   };
@@ -94,7 +94,7 @@ export default function ChuridharListing() {
                           Out of Stock
                         </div>
                       )}
-                      <motion.div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6 px-4">
+                      <motion.div className="hidden sm:flex absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6 px-4">
                         <button
                           onClick={() => handleWhatsAppClick(product)}
                           className="w-full bg-white text-black py-3 rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"

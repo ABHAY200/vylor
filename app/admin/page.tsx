@@ -113,8 +113,25 @@ export default function AdminDashboard() {
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.size > 500 * 1024) {
+      alert("Image size must be less than 500KB");
+      e.target.value = ""; // Reset input
+      setFile(null);
+      return;
+    }
+    setFile(selectedFile || null);
+  };
+
   const handleImageUpload = async (file: File) => {
     try {
+      // Validate file size (500KB)
+      if (file.size > 500 * 1024) {
+        alert("Image size must be less than 500KB. Please compress your image and try again.");
+        return null;
+      }
+
       setUploading(true);
       const fileExt = file.name.split(".").pop();
       const fileName = `${Math.random()}.${fileExt}`;
@@ -149,9 +166,18 @@ export default function AdminDashboard() {
       if (uploadedUrl) imageUrl = uploadedUrl;
     }
 
-    const productData = { ...formData, image: imageUrl };
+    const { id, created_at, ...productData } = { ...formData, image: imageUrl } as any;
 
     if (editingProduct) {
+      // If a new file was uploaded, delete the old image from storage if it exists there
+      if (file && editingProduct.image && editingProduct.image.includes('product-images')) {
+        const urlParts = editingProduct.image.split('product-images/');
+        if (urlParts.length > 1) {
+          const oldFilePath = urlParts[1].split('?')[0];
+          await supabase.storage.from("product-images").remove([oldFilePath]);
+        }
+      }
+
       const { error } = await supabase
         .from("products")
         .update(productData)
@@ -178,9 +204,40 @@ export default function AdminDashboard() {
 
   const handleDelete = async (id: number) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      const { error } = await supabase.from("products").delete().eq("id", id);
-      if (!error) {
-        setProducts(products.filter((p) => p.id !== id));
+      try {
+        // 1. Get the product info before deleting to find the image URL
+        const productToDelete = products.find(p => p.id === id);
+        
+        if (productToDelete && productToDelete.image) {
+          // 2. Check if the image is in Supabase storage (contains 'product-images' bucket name)
+          if (productToDelete.image.includes('product-images')) {
+            // Extract the path after 'product-images/'
+            const urlParts = productToDelete.image.split('product-images/');
+            if (urlParts.length > 1) {
+              const filePath = urlParts[1].split('?')[0]; // Remove any query params
+              
+              // 3. Delete from storage
+              const { error: storageError } = await supabase.storage
+                .from("product-images")
+                .remove([filePath]);
+                
+              if (storageError) {
+                console.error("Error deleting image from storage:", storageError);
+              }
+            }
+          }
+        }
+
+        // 4. Delete the product from the database
+        const { error } = await supabase.from("products").delete().eq("id", id);
+        if (!error) {
+          setProducts(products.filter((p) => p.id !== id));
+        } else {
+          alert("Error deleting product: " + error.message);
+        }
+      } catch (err: any) {
+        console.error("Delete operation failed:", err);
+        alert("An error occurred during deletion.");
       }
     }
   };
@@ -323,18 +380,24 @@ export default function AdminDashboard() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <div className="flex justify-end gap-3">
+                        <div className="flex justify-end gap-2">
                           <button
                             onClick={() => handleOpenModal(product)}
-                            className="text-blue-600 hover:text-blue-800 text-sm font-bold transition-colors"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                            title="Edit"
                           >
-                            Edit
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
                           </button>
                           <button
                             onClick={() => handleDelete(product.id)}
-                            className="text-red-500 hover:text-red-700 text-sm font-bold transition-colors"
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition-all"
+                            title="Delete"
                           >
-                            Delete
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
                           </button>
                         </div>
                       </td>
@@ -372,18 +435,24 @@ export default function AdminDashboard() {
                       </div>
                       <div className="flex justify-between items-center mt-2">
                         <span className="font-bold text-gray-900 text-lg">₹{product.price.toLocaleString()}</span>
-                        <div className="flex gap-4">
+                        <div className="flex gap-2">
                           <button
                             onClick={() => handleOpenModal(product)}
-                            className="text-blue-600 font-bold text-sm"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                            title="Edit"
                           >
-                            Edit
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
                           </button>
                           <button
                             onClick={() => handleDelete(product.id)}
-                            className="text-red-500 font-bold text-sm"
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition-all"
+                            title="Delete"
                           >
-                            Delete
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
                           </button>
                         </div>
                       </div>
@@ -418,7 +487,7 @@ export default function AdminDashboard() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative bg-white rounded-t-[2.5rem] sm:rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl max-h-[92vh] flex flex-col"
+              className="relative bg-white rounded-t-[1rem] sm:rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl max-h-[92vh] flex flex-col"
             >
               <div className="p-6 sm:p-8 border-b border-gray-50 flex justify-between items-center bg-white sticky top-0 z-10">
                 <div>
@@ -511,37 +580,65 @@ export default function AdminDashboard() {
 
                   <div className="sm:col-span-2">
                     <label className="block text-sm font-bold text-gray-700 mb-1.5 ml-1">Product Image</label>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col gap-4">
+                      {/* Existing Image Preview */}
                       {formData.image && !file && (
-                        <div className="relative w-20 h-24 rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 flex-shrink-0 self-start sm:self-auto">
-                          <Image src={formData.image} alt="Preview" fill className="object-cover" />
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                          <div className="relative w-16 h-20 rounded-xl overflow-hidden bg-white border border-gray-200 flex-shrink-0">
+                            <Image src={formData.image} alt="Preview" fill className="object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-bold text-gray-900 truncate">{formData.image}</p>
+                            <p className="text-[10px] text-gray-500 mt-0.5">Current image URL</p>
+                          </div>
                         </div>
                       )}
-                      <div className="flex-1">
-                        <label className="group relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl hover:border-black/20 hover:bg-gray-50/50 transition-all cursor-pointer overflow-hidden">
-                          {file ? (
-                            <div className="text-center p-4">
-                              <p className="text-sm font-bold text-gray-900 truncate max-w-[200px]">{file.name}</p>
-                              <p className="text-xs text-gray-500 mt-1">Tap to change file</p>
-                            </div>
-                          ) : (
-                            <div className="text-center p-4">
-                              <div className="mb-2 flex justify-center">
-                                <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* File Upload Option */}
+                        <div className="flex-1">
+                          <label className="group relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl hover:border-black/20 hover:bg-gray-50/50 transition-all cursor-pointer overflow-hidden">
+                            {file ? (
+                              <div className="text-center p-4">
+                                <p className="text-sm font-bold text-gray-900 truncate max-w-[150px]">{file.name}</p>
+                                <p className="text-xs text-gray-500 mt-1">Tap to change</p>
                               </div>
-                              <p className="text-xs font-bold text-gray-700">Choose Image</p>
-                              <p className="text-[10px] text-gray-400 mt-0.5 uppercase tracking-wider font-semibold">JPG, PNG, WEBP</p>
-                            </div>
-                          )}
+                            ) : (
+                              <div className="text-center p-4">
+                                <div className="mb-2 flex justify-center">
+                                  <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                  </svg>
+                                </div>
+                                <p className="text-xs font-bold text-gray-700">Upload Image</p>
+                                <p className="text-[10px] text-gray-400 mt-0.5 uppercase tracking-wider font-semibold">Max 500KB</p>
+                              </div>
+                            )}
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleFileChange}
+                              className="absolute inset-0 opacity-0 cursor-pointer"
+                            />
+                          </label>
+                        </div>
+
+                        {/* URL Option */}
+                        <div className="flex flex-col justify-center gap-2 p-4 bg-white border-2 border-gray-100 rounded-2xl">
+                          <p className="text-xs font-bold text-gray-700 mb-1">OR Use Image URL</p>
                           <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => setFile(e.target.files?.[0] || null)}
-                            className="absolute inset-0 opacity-0 cursor-pointer"
+                            type="text"
+                            name="image"
+                            placeholder="https://example.com/image.jpg"
+                            value={formData.image}
+                            onChange={(e) => {
+                              handleInputChange(e);
+                              if (e.target.value) setFile(null); // Clear file if URL is provided
+                            }}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black text-sm transition-all"
                           />
-                        </label>
+                          <p className="text-[10px] text-gray-400 italic font-medium">Link from external storage</p>
+                        </div>
                       </div>
                     </div>
                   </div>
