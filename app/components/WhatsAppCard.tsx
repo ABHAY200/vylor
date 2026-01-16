@@ -29,8 +29,6 @@ export default function WhatsAppCard() {
       </p>
       <motion.a
         href={CONTACT.whatsappLink}
-        target="_blank"
-        rel="noopener noreferrer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="inline-flex items-center px-8 py-4 bg-[#25D366] text-white rounded-full font-bold text-lg hover:bg-[#22c35e] transition-colors shadow-lg shadow-green-100"

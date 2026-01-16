@@ -34,7 +34,7 @@ export default function ChuridharListing() {
   const handleWhatsAppClick = (product: any) => {
     const message = `*New Product Inquiry* 🛍️\n\n*Product Name:* ${product.name}\n*Color:* ${product.color}\n*Fabric:* ${product.fabric}\n*Occasion:* ${product.occasion}\n\n*Product Image:* ${product.image}\n\nHi, I'm interested in this product. Can I get more details?`;
     const encodedMessage = encodeURIComponent(message);
-    window.open(`${CONTACT.whatsappLink}?text=${encodedMessage}`, "_blank");
+    window.location.href = `${CONTACT.whatsappLink}?text=${encodedMessage}`;
   };
 
   return (
