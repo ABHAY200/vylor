@@ -26,25 +26,6 @@ export default function ChuridharListing() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <Link
-              href="/"
-              className="inline-flex items-center text-sm text-gray-500 hover:text-black mb-8 transition-colors group"
-            >
-              <svg
-                className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Back to Home
-            </Link>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               Womens Churidhar Collection
             </h1>
