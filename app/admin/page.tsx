@@ -21,11 +21,11 @@ export default function AdminDashboard() {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     name: "",
     fabric: "Cotton",
     color: "",
-    price: 0,
+    price: "",
     lengthMeters: 4,
     occasion: "Casual",
     inStock: true,
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
         name: "",
         fabric: "Cotton",
         color: "",
-        price: 0,
+        price: "",
         lengthMeters: 4,
         occasion: "Casual",
         inStock: true,
@@ -106,10 +106,10 @@ export default function AdminDashboard() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : 
-               type === "number" ? Number(value) : value,
+               type === "number" ? (value === "" ? "" : Number(value)) : value,
     }));
   };
 
@@ -597,7 +597,10 @@ export default function AdminDashboard() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* File Upload Option */}
                         <div className="flex-1">
-                          <label className="group relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl hover:border-black/20 hover:bg-gray-50/50 transition-all cursor-pointer overflow-hidden">
+                          <label 
+                            htmlFor="file-upload"
+                            className="group relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl hover:border-black/20 hover:bg-gray-50/50 transition-all cursor-pointer overflow-hidden"
+                          >
                             {file ? (
                               <div className="text-center p-4">
                                 <p className="text-sm font-bold text-gray-900 truncate max-w-[150px]">{file.name}</p>
@@ -615,10 +618,11 @@ export default function AdminDashboard() {
                               </div>
                             )}
                             <input
+                              id="file-upload"
                               type="file"
                               accept="image/*"
                               onChange={handleFileChange}
-                              className="absolute inset-0 opacity-0 cursor-pointer"
+                              className="absolute inset-0 opacity-0 cursor-pointer z-10"
                             />
                           </label>
                         </div>
