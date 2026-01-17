@@ -643,8 +643,8 @@ export default function AdminDashboard() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-4 bg-gray-50/50 rounded-2xl border border-gray-100 sm:col-span-2">
-                    <div className="relative inline-flex items-center cursor-pointer">
+                  <div className="flex items-center p-4 bg-gray-50/50 rounded-2xl border border-gray-100 sm:col-span-2">
+                    <label className="relative inline-flex items-center cursor-pointer w-full">
                       <input
                         type="checkbox"
                         id="inStock"
@@ -654,8 +654,8 @@ export default function AdminDashboard() {
                         className="sr-only peer"
                       />
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
-                    </div>
-                    <label htmlFor="inStock" className="text-sm font-bold text-gray-700">Currently in stock</label>
+                      <span className="ml-3 text-sm font-bold text-gray-700">Currently in stock</span>
+                    </label>
                   </div>
                 </div>
 
